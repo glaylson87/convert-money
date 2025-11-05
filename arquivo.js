@@ -1,17 +1,20 @@
 const convertButton = document.querySelector(".convert-button");
 const selecetMoeda = document.querySelector(".moeda-select")
 
-function convertvalues() {
+async function convertvalues() {
 
     const inputValorQuantia = document.querySelector(".input-quantia").value
     const valorVaiSerConvertido = document.querySelector(".valor2-convert")
     const valorConvertido = document.querySelector(".valor2")
 
+    const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then(response => response.json())
 
-    const dolarhj = 5.2
-    const eurohj = 6.2
-    const librahj = 7.0
-    const bitcoinhj = 300000.00
+    const dolarhj = data.USDBRL.high
+    const eurohj = data.EURBRL.high
+    const bitcoinhj = data.BTCBRL.high
+
+
+
 
     if (selecetMoeda.value == "dolar") {
         valorConvertido.innerHTML = new Intl.NumberFormat('en-US', {
